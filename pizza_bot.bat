@@ -1,6 +1,6 @@
 @echo off
 
-call %~dp0Telegram_Bot\bot_venv\Scripts\activate
+call %~dp0Telegram_Bot\venv\Scripts\activate
 
 cd %~dp0Telegram_Bot
 
