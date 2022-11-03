@@ -1,6 +1,7 @@
 from aiogram import types
-from create_bot import dp, bot, Dispatcher
+from create_bot import bot, Dispatcher
 from keyboards import kb_client
+from aiogram.dispatcher.filters import Text
 
 
 async def command_start(message: types.Message):
@@ -30,5 +31,5 @@ async def place_command(message: types.Message):
 
 def register_handler_client(dp: Dispatcher):
     dp.register_message_handler(command_start, commands=['start', 'help'])
-    dp.register_message_handler(open_command, commands=['Режим_работы'])
-    dp.register_message_handler(place_command, commands=['Расположение'])
+    dp.register_message_handler(open_command, Text(equals='Режим работы', ignore_case=True))
+    dp.register_message_handler(place_command, Text(equals='Расположение', ignore_case=True))
