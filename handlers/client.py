@@ -2,6 +2,7 @@ from aiogram import types
 from create_bot import bot, Dispatcher
 from keyboards import kb_client
 from aiogram.dispatcher.filters import Text
+from data_base import sqlite_db
 
 
 async def command_start(message: types.Message):
@@ -29,7 +30,12 @@ async def place_command(message: types.Message):
         await message.reply('Общение с ботом через ЛС, напишите ему:\nhttps://t.me/route22_bot')
 
 
+async def pizza_menu(message: types.Message):
+    await sqlite_db.sql_read(message)
+
+
 def register_handler_client(dp: Dispatcher):
     dp.register_message_handler(command_start, commands=['start', 'help'])
     dp.register_message_handler(open_command, Text(equals='Режим работы', ignore_case=True))
     dp.register_message_handler(place_command, Text(equals='Расположение', ignore_case=True))
+    dp.register_message_handler(pizza_menu, Text(equals='Меню', ignore_case=True))
